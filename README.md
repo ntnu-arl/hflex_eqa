@@ -4,6 +4,7 @@
   <a href="https://ntnu-arl.github.io/hflexeqa/"><img src="https://img.shields.io/badge/Homepage-1E88E5?style=flat-square" alt="Webpage"></a>
   <a href="https://arxiv.org/abs/2609.26360"><img src="https://img.shields.io/badge/arXiv-78909C?style=flat-square" alt="arXiv"></a>
   <a href="https://www.youtube.com/watch?v=fvqagiNmVcI"><img src="https://img.shields.io/badge/YouTube-E57373?style=flat-square" alt="YouTube"></a>
+  <a href="https://doi.org/10.5281/zenodo.22919690"><img src="https://img.shields.io/badge/ZenodoDOI-73E5E5?style=flat-square" alt="Zenodo DOI"></a>
 </div>
 
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
