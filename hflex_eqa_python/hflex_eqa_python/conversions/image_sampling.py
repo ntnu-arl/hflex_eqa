@@ -30,6 +30,7 @@
 #
 """Utilities for sampling room images"""
 
+import os
 from dataclasses import dataclass
 from typing import Any
 
@@ -58,7 +59,9 @@ class BaseImageSampler:
         """
         self._config = config
         self._encoder = self._config.clip_model.create()
-        self._encoder.to(default_device(cuda_device=0))
+        self._encoder.to(
+            os.environ.get("HFLEX_EQA_QUERY_DEVICE") or default_device(cuda_device=0)
+        )
 
         self._object_features = None
         self._question_feature = None

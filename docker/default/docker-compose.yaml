@@ -21,6 +21,7 @@ x-ros2-hflex_eqa-base: &ros2_hflex_eqa_base
     COLCON_DEFAULTS_FILE: /developer/hflex_eqa_ws/colcon_defaults.yaml
     HF_HOME: /developer/hflex_eqa_ws/hf_cache
     HF_HUB_OFFLINE: ${HF_HUB_OFFLINE:-0}
+    HFLEX_EQA_QUERY_DEVICE: ${HFLEX_EQA_QUERY_DEVICE:-}
     TRANSFORMERS_OFFLINE: ${TRANSFORMERS_OFFLINE:-0}
     OPENAI_API_KEY: ${OPENAI_API_KEY:-}
     ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}

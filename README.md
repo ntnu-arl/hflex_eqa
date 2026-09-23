@@ -71,7 +71,6 @@ Inside the container, build and source the ROS overlay:
 
 ```bash
 cd /developer/hflex_eqa_ws
-rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --continue-on-error
 source install/setup.bash
 ```
@@ -190,6 +189,14 @@ ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
   question:="What color is the microwave"
 ```
 
+On an 8 GB GPU, set `HFLEX_EQA_QUERY_DEVICE=cpu` before the launch command to move the text-query CLIP models to CPU. YOLOE and LSeg still run on the GPU, and the VLM backend is unchanged:
+
+```bash
+HFLEX_EQA_QUERY_DEVICE=cpu ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
+  scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
+  question:="What color is the microwave"
+```
+
 No floorplan is loaded by default: the nested high-level launch uses an empty node/edge list and no JSON path. `use_floorplan_prior` defaults to `true`, but the planner only adds the prior when the graph contains nodes. To load a graph generated in the [floorplan step](#generate-habitat-floorplans), pass its **container path** through the single-scene launch:
 
 ```bash
@@ -205,6 +212,8 @@ ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
 Replace the example scene with one whose graph exists. For ExploreEQA, use `explore_eqa_regions_<floor>/topological_graph.json` instead of `regions/topological_graph.json`. The [top-level launch](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/habitat/habitat_eqa.launch.yaml) forwards these arguments to the [high-level launch](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/habitat/habitat_high_level.launch.yaml); changing only the floorplan fields in `high_level.yaml` is insufficient because launch arguments override them.
 
 The main launch is [`habitat_eqa.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/habitat/habitat_eqa.launch.yaml). Edit the local [`high_level.yaml`](hflex_eqa/config/habitat/high_level.yaml) to select OpenAI, Gemini, Llama, Anthropic, or an OpenAI-compatible local vLLM backend; [`habitat.yaml`](hflex_eqa/config/habitat/habitat.yaml) holds the C++ planner settings, and the [Habitat prompt files](hflex_eqa/config/habitat/) hold VLM instructions. The current launch interpolates `question` into unquoted YAML, so avoid punctuation such as `?` in this override.
+
+Single-scene launches start each EQA iteration automatically and send HFLEX-EQA's planned path to Habitat. Dataset launches use the simulation manager's episode trigger by default.
 
 ## Run OpenEQA or ExploreEQA
 
@@ -224,9 +233,15 @@ ros2 launch simulation_manager_ros simulate.launch.yaml \
 
 This runs [`simulate.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/simulation_manager_ros/launch/simulate.launch.yaml) with the copied config. `make dataset` starts the same launch with its packaged default config. If `use_floorplan_prior` is enabled, [generate the floorplans](#generate-habitat-floorplans) first or disable the prior in your experiment config. The [test-split generator](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/simulation_manager_ros/data/hm3d/create_eqa_test_splits.py) is only needed when using a saved split manifest.
 
+For an 8 GB GPU, pass `HFLEX_EQA_QUERY_DEVICE=cpu` to `make dataset` to run the text-query CLIP models on CPU:
+
+```bash
+make dataset HM3D_DATA=/path/to/hm3d HFLEX_EQA_QUERY_DEVICE=cpu
+```
+
 ## Deploy on Jetson Thor and ANYmal
 
-On the robot computer, import [`install/thor.repos`](install/thor.repos), copy [`docker/thor/.env.example`](docker/thor/.env.example) to `.env`, then run `make build` and `make run` from [`docker/thor/`](docker/thor/). Build the overlay in the container using the same `colcon` command above. The robot must provide the camera topics and `world -> body -> camera_link` transforms expected by [`scene_graph.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/scene_graph.launch.yaml); adapt remappings for another payload.
+On the robot computer, import [`install/thor.repos`](install/thor.repos) and optionally [`install/thor_sensors_slam.repos`](install/thor_sensors_slam.repos) which contains the sensors and SLAM ros packages, copy [`docker/thor/.env.example`](docker/thor/.env.example) to `.env`, then run `make build` and `make run` from [`docker/thor/`](docker/thor/). Build the ROS packages in the container using the same `colcon` command above. The robot must provide the camera topics and `world -> body -> camera_link` transforms expected by [`scene_graph.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/scene_graph.launch.yaml); adapt remappings for another payload.
 
 Start the complete stack with `make launch`, or use separate terminals:
 
@@ -236,11 +251,11 @@ ros2 launch hflex_eqa_ros eqa.launch.yaml \
   floorplan_json_path:=/path/to/building_floorplan.json
 ```
 
-The reusable [`eqa.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/eqa.launch.yaml), scene-graph launch, and [example paper floorplan](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/config/anymal/eqa_floorplan.json) live in `hflex_eqa_ros`, so the private ANYmal integration repository is not required. Robot planner settings are in the local [`config/anymal/`](hflex_eqa/config/anymal/); [ROS topic settings](https://github.com/ntnu-arl/hflex_eqa_ros/tree/main/hflex_eqa_ros/config/anymal/) and the floorplan are in `hflex_eqa_ros`; Hydra's robot map settings are in [`reasoning_hydra/config/datasets/anymal.yaml`](https://github.com/ntnu-arl/reasoning_hydra/blob/hflex_eqa/config/datasets/anymal.yaml).
+The reusable [`eqa.launch.yaml`](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/eqa.launch.yaml), scene-graph launch, and [example paper floorplan](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/config/anymal/eqa_floorplan.json) live in `hflex_eqa_ros`. Robot planner settings are in the local [`config/anymal/`](hflex_eqa/config/anymal/); [ROS topic settings](https://github.com/ntnu-arl/hflex_eqa_ros/tree/main/hflex_eqa_ros/config/anymal/) and the floorplan are in `hflex_eqa_ros`; Hydra's robot map settings are in [`reasoning_hydra/config/datasets/anymal.yaml`](https://github.com/ntnu-arl/reasoning_hydra/blob/hflex_eqa/config/datasets/anymal.yaml).
 
 ## Dependency branch matrix
 
-Most NTNU-ARL dependencies use the unified `hflex_eqa` branch for both workflows. Two mapping dependencies remain platform-specific because the Thor build uses a custom GTSAM stack:
+Most NTNU-ARL dependencies use the unified `hflex_eqa` branch for both workflows (dataset and robot with a Jetson Thor). Two mapping dependencies remain platform-specific because our Thor build uses a custom GTSAM stack:
 
 | Repository | Dataset/simulation | Robot deployment |
 | --- | --- | --- |

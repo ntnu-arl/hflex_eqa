@@ -90,8 +90,8 @@ low_level:
     enabled: false
     min: [-10.0, -10.0, -2.0]
     max: [10.0, 10.0, 3.0]
-  simulation: true
-  direct_goal_mode: true
+  simulation: false
+  direct_goal_mode: false
   collision_avoidance_start: true
   collision_avoidance_goal: true
 search_manager:

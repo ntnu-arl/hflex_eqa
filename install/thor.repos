@@ -51,27 +51,3 @@ repositories:
     type: git
     url: https://github.com/ntnu-arl/vlms_ros.git
     version: main
-  ouster-ros:
-    type: git
-    url: https://github.com/ouster-lidar/ouster-ros.git
-    version: jazzy-devel
-  realsense-ros:
-    type: git
-    url: https://github.com/realsenseai/realsense-ros.git
-    version: ros2-master
-  vectornav:
-    type: git
-    url: https://github.com/ntnu-arl/vectornav.git
-    version: ros2
-  gtsam:
-    type: git
-    url: https://github.com/ntnu-arl/gtsam.git
-    version: feature/imu_factor_with_gravity
-  gtsam_points:
-    type: git
-    url: https://github.com/ntnu-arl/gtsam_points.git
-    version: minimal_updated
-  mimosa:
-    type: git
-    url: https://github.com/ntnu-arl/mimosa.git
-    version: dev/ros2

@@ -6,7 +6,8 @@ CONTAINER ?= hflex_eqa
 HFLEX_WS ?= $(abspath ../../../..)
 HM3D_DATA ?= $(HFLEX_WS)/data/hm3d
 RESULTS_DIR ?= $(HFLEX_WS)/results
-export HFLEX_WS HM3D_DATA RESULTS_DIR
+HFLEX_EQA_QUERY_DEVICE ?=
+export HFLEX_WS HM3D_DATA RESULTS_DIR HFLEX_EQA_QUERY_DEVICE
 
 .PHONY: build run simulation dataset stop attach logs
 
