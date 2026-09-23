@@ -186,7 +186,7 @@ Then launch an episode inside the container:
 SCENE_DIR=/developer/hm3d/val/00800-TEEsavR23oF
 ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
   scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
-  question:="What color is the microwave"
+  question:="What color is the bed frame"
 ```
 
 On an 8 GB GPU, set `HFLEX_EQA_QUERY_DEVICE=cpu` before the launch command to move the text-query CLIP models to CPU. YOLOE and LSeg still run on the GPU, and the VLM backend is unchanged:
@@ -194,7 +194,7 @@ On an 8 GB GPU, set `HFLEX_EQA_QUERY_DEVICE=cpu` before the launch command to mo
 ```bash
 HFLEX_EQA_QUERY_DEVICE=cpu ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
   scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
-  question:="What color is the microwave"
+  question:="What color is the bed frame"
 ```
 
 No floorplan is loaded by default: the nested high-level launch uses an empty node/edge list and no JSON path. `use_floorplan_prior` defaults to `true`, but the planner only adds the prior when the graph contains nodes. To load a graph generated in the [floorplan step](#generate-habitat-floorplans), pass its **container path** through the single-scene launch:
@@ -206,7 +206,7 @@ ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
   floorplan_source:=json \
   floorplan_json_path:="$SCENE_DIR/regions/topological_graph.json" \
   use_floorplan_prior:=true \
-  question:="What color is the microwave"
+  question:="What color is the bed frame"
 ```
 
 Replace the example scene with one whose graph exists. For ExploreEQA, use `explore_eqa_regions_<floor>/topological_graph.json` instead of `regions/topological_graph.json`. The [top-level launch](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/habitat/habitat_eqa.launch.yaml) forwards these arguments to the [high-level launch](https://github.com/ntnu-arl/hflex_eqa_ros/blob/main/hflex_eqa_ros/launch/habitat/habitat_high_level.launch.yaml); changing only the floorplan fields in `high_level.yaml` is insufficient because launch arguments override them.
