@@ -183,9 +183,9 @@ make run HM3D_DATA="$HOME/hflex_eqa_ws/data/versioned_data/hm3d-0.2/hm3d"
 Then launch an episode inside the container:
 
 ```bash
-SCENE_DIR=/developer/hm3d/val/00800-TEEsavR23oF
+SCENE_DIR=/developer/hm3d/val/00808-y9hTuugGdiq
 ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
-  scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
+  scene_file:="$SCENE_DIR/y9hTuugGdiq.basis.glb" \
   question:="What color is the bed frame"
 ```
 
@@ -193,16 +193,16 @@ On an 8 GB GPU, set `HFLEX_EQA_QUERY_DEVICE=cpu` before the launch command to mo
 
 ```bash
 HFLEX_EQA_QUERY_DEVICE=cpu ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
-  scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
+  scene_file:="$SCENE_DIR/y9hTuugGdiq.basis.glb" \
   question:="What color is the bed frame"
 ```
 
 No floorplan is loaded by default: the nested high-level launch uses an empty node/edge list and no JSON path. `use_floorplan_prior` defaults to `true`, but the planner only adds the prior when the graph contains nodes. To load a graph generated in the [floorplan step](#generate-habitat-floorplans), pass its **container path** through the single-scene launch:
 
 ```bash
-SCENE_DIR=/developer/hm3d/val/00800-TEEsavR23oF
+SCENE_DIR=/developer/hm3d/val/00808-y9hTuugGdiq
 ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml \
-  scene_file:="$SCENE_DIR/TEEsavR23oF.basis.glb" \
+  scene_file:="$SCENE_DIR/y9hTuugGdiq.basis.glb" \
   floorplan_source:=json \
   floorplan_json_path:="$SCENE_DIR/regions/topological_graph.json" \
   use_floorplan_prior:=true \
