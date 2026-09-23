@@ -1,0 +1,18 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+
+get_filename_component(hvlm_planner_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+find_dependency(config_utilities REQUIRED)
+find_dependency(Eigen3 REQUIRED)
+find_dependency(spark_dsg REQUIRED)
+find_dependency(OpenCV REQUIRED)
+find_dependency(nanoflann REQUIRED)
+find_package(Open3D REQUIRED)
+
+if(NOT TARGET hvlm_planner::hvlm_planner)
+  include("${hvlm_planner_CMAKE_DIR}/hvlm_plannerTargets.cmake")
+endif()
+
+set(hvlm_planner_LIBRARIES hvlm_planner::hvlm_planner)
+check_required_components(hvlm_planner)

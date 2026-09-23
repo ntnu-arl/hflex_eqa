@@ -1,0 +1,25 @@
+**/.git
+**/.ruff_cache
+**/__pycache__
+# Ignore generated workspace/package outputs, not vendored source directories
+# such as habitat_sim/src/deps/zstd/build/cmake.
+build
+install
+log
+src/*/build
+src/*/install
+src/*/log
+src/*/*/build
+src/*/*/install
+src/*/*/log
+**/*.pyc
+bags
+data
+.clip
+FastSAM-x.pt
+hf_cache
+hf_models
+mobileclip_blt.ts
+models
+results
+yoloe-11l-seg.pt

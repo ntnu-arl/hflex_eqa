@@ -1,0 +1,7 @@
+add_subdirectory(common)
+add_subdirectory(low_level)
+add_subdirectory(search_manager)
+add_subdirectory(similarity)
+add_subdirectory(splines)
+add_subdirectory(utils)
+add_subdirectory(vp_selection)

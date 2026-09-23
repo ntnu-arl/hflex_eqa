@@ -1,0 +1,98 @@
+---
+eqa_planner:
+  debug_input: false
+  history_length: 1000
+  max_images_per_room: 3
+  question: Where is the kitchen?
+  classify_rooms: true
+  room_classification_min_confidence: 0.0
+  stitch_room_images: false
+  room_image_stitching: none  # none, grid, pose
+  use_floorplan_rooms_as_choices: true
+  floorplan_source: list  # list, json
+  floorplan_json_path: ''
+  log_folder: /developer/results/eqa
+  vlm:
+    type: openai
+    client_config:
+      model: gpt-5.5
+    log: true
+    # system_prompt_path:
+    # examples_path:
+    #
+    # Gemini EQA example:
+    # type: gemini
+    # client_config:
+    #   model: gemini-2.5-flash
+    #   api_key_env: GEMINI_API_KEY
+    #  # Optional:
+    #  # max_output_tokens: 4096
+    #  # temperature: 0.0
+    #  # response_mime_type: application/json
+    # log: true
+    # system_prompt_path: /path/to/eqa_planner_with_floorplan_system_prompt.txt
+    #
+    # Llama EQA example:
+    # type: llama
+    # client_config:
+    #   model: Llama-4-Maverick-17B-128E-Instruct-FP8
+    #   api_key_env: LLAMA_API_KEY
+    #  # Optional:
+    #  # max_completion_tokens: 4096
+    #  # temperature: 0.0
+    #  # top_p: 1.0
+    #  # top_k: 40
+    # log: true
+    # system_prompt_path: /path/to/eqa_planner_with_floorplan_system_prompt.txt
+    #
+    # Local vLLM EQA example:
+    # type: vllm
+    # client_config:
+    #   model: cpatonn/Qwen3-VL-8B-Instruct-AWQ-4bit
+    #   base_url: http://127.0.0.1:8000/v1
+    #   api_key: not-needed
+    #  # Optional:
+    #  # use_system_message: false
+    #  # max_tokens: 4096
+    #  # temperature: 0.0
+    #  # top_p: 1.0
+    #  # extra_body:
+    #  #   top_k: 40
+    # log: true
+    # system_prompt_path: /path/to/eqa_planner_with_floorplan_system_prompt.txt
+    # Anthropic Claude EQA example:
+    # type: anthropic  # or claude
+    # client_config:
+    #   model: claude-opus-4-8
+    #   api_key_env: ANTHROPIC_API_KEY
+    #  # Optional:
+    #  # max_tokens: 4096
+    #  # temperature: 0.0
+    #  # top_p: 1.0
+    #  # top_k: 40
+    # log: true
+    # system_prompt_path: /path/to/eqa_planner_with_floorplan_system_prompt.txt
+  room_classification:
+    type: openai
+    client_config:
+      model: gpt-4o
+    log: true
+    # system_prompt_path:
+    #
+    # Local vLLM room classification example:
+    # type: vllm
+    # client_config:
+    #   model: RedHatAI/gemma-3-12b-it-quantized.w4a16
+    #   base_url: http://127.0.0.1:8000/v1
+    #   api_key: not-needed
+    # log: true
+    # system_prompt_path: /path/to/room_classification/system_prompt.txt
+  image_sampler:
+    type: question  # disparity, object, question
+    max_images_per_room: 3
+    clip_model:
+      type: clip
+      model_name: ViT-B/32
+embedding_model:
+  type: clip
+  model_name: ViT-B/32

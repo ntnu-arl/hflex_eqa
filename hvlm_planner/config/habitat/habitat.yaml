@@ -1,0 +1,109 @@
+---
+low_level:
+  type: LowLevelModule
+  semantic_search:
+    type: ClipSearch  # ClipSearch, QuestionRoomClipSearch, ClosestSearch
+    # alpha: 0.5
+    # beta: 0.5
+    # debug_log_scores: false
+    similarity:
+      type: cosine_similarity  # cosine_similarity | frontier_single_cosine_similarity | simple_cosine_similarity
+      pooling_mode: average  # average | max
+      weights_mode: exponential_decay  # uniform | linear_decay | exponential_decay
+      exponential_decay_rate: 0.5
+    search_layer: FRONTIERS
+    nav_layer: TRAVERSABILITY  # 3D: PLACES, 2D: TRAVERSABILITY
+    use_goal_orientation: true
+    shortest_path:
+      type: Dijkstra
+      project_to_ground: false
+      check_occupancy_grid: false
+  planner:
+    type: BSplinePlanner
+    num_points_integration: 300
+    interpolate_yaw_waypoints: true
+    add_goal: false
+    delta_distance: 0.05
+  node_search:
+    type: NodeSearch
+    search_layer: FRONTIERS
+    nav_layer: TRAVERSABILITY  # 3D: PLACES, 2D: TRAVERSABILITY
+    use_goal_orientation: true
+    shortest_path:
+      type: Dijkstra
+      project_to_ground: false
+      check_occupancy_grid: false
+  object_search:
+    type: ObjectVpsSearch
+    search_layer: FRONTIERS
+    nav_layer: TRAVERSABILITY  # 3D: PLACES, 2D: TRAVERSABILITY
+    use_goal_orientation: true
+    shortest_path:
+      type: Dijkstra
+      project_to_ground: false
+      check_occupancy_grid: false
+    vp_selection:
+      type: circle_2d
+      num_angle_samples: 48
+      top_n: 45
+      min_angular_separation_degrees: 15
+      num_radius_samples: 5
+      radius_margin: 1.0
+      coarse_to_fine_enabled: true
+      coarse_to_fine_min_samples: 24
+      coarse_stride: 6
+      coarse_seed_count: 6
+      coarse_refine_window: 3
+      visibility_occlusion_weight: 0.7
+      visibility_framing_weight: 0.3
+      camera_config:
+        fx: 525.0
+        fy: 525.0
+        cx: 319.5
+        cy: 239.5
+        width: 640
+        height: 480
+      visualize_score: false
+    a_star_config:
+      use_diagonal: false
+  find_room_search:
+    type: FindRoomSearch  # FindRoomSearch, ClosestSearch
+    alpha: 0.35
+    beta: 0.55
+    gamma: 0.10
+    debug_log_scores: false
+    similarity:
+      type: cosine_similarity
+      pooling_mode: max
+      weights_mode: uniform
+      exponential_decay_rate: 0.5
+    search_layer: FRONTIERS
+    nav_layer: TRAVERSABILITY  # 3D: PLACES, 2D: TRAVERSABILITY
+    use_goal_orientation: true
+    shortest_path:
+      type: Dijkstra
+      project_to_ground: false
+      check_occupancy_grid: false
+  a_star_config:
+    use_diagonal: false
+  bounding_box:
+    enabled: false
+    min: [-10.0, -10.0, -2.0]
+    max: [10.0, 10.0, 3.0]
+  simulation: true
+  direct_goal_mode: true
+  collision_avoidance_start: true
+  collision_avoidance_goal: true
+search_manager:
+  type: EQAPlannerManagerModule
+  frontier_blacklist_trans_tolerance: 1.0
+  frontier_blacklist_rot_tolerance: 20.0
+  progress_timeout_ns: 30000000000
+  goal_reached_threshold_trans: 0.05
+  goal_reached_threshold_angle: 5
+  eqa_planner_callable: call_eqa_planner
+  finish_callable: call_finish
+  log_call: true
+  triggered: true
+  nav_layer: TRAVERSABILITY
+  viewpoint_selection: true

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+    <name>hvlm_planner_python</name>
+    <version>1.0.0</version>
+    <description>Hierarchical VLM-based planner Python components</description>
+
+    <author email="albert.g.puigjaner@ntnu.no">Albert Gassol Puigjaner</author>
+    <maintainer email="albert.g.puigjaner@ntnu.no">Albert Gassol Puigjaner</maintainer>
+
+    <license>BSD</license>
+
+    <depend>vlms_python</depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

@@ -1,0 +1,8 @@
+target_sources(
+  ${PROJECT_NAME}
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/bezier.cpp
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/bspline.cpp
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/catmull_rom.cpp
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/curve.cpp
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/vector.cpp
+)

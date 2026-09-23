@@ -1,0 +1,44 @@
+---
+x-ros2-hvlm-base: &ros2_hvlm_base
+  image: ros2_cuda:hflex-eqa
+  build:
+    context: ${HFLEX_WS}
+    dockerfile: src/hvlm_planner/docker/default/Dockerfile
+  network_mode: host
+  ipc: host
+  pid: host
+  privileged: true
+  runtime: nvidia
+  working_dir: /developer/hflex_eqa_ws
+  ulimits:
+    memlock: -1
+    stack: 67108864
+  group_add: [dialout]
+  environment:
+    DISPLAY: ${DISPLAY}
+    ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+    CYCLONEDDS_URI: file:///tmp/cyclonedds.xml
+    COLCON_DEFAULTS_FILE: /developer/hflex_eqa_ws/colcon_defaults.yaml
+    HF_HOME: /developer/hflex_eqa_ws/hf_cache
+    HF_HUB_OFFLINE: ${HF_HUB_OFFLINE:-0}
+    TRANSFORMERS_OFFLINE: ${TRANSFORMERS_OFFLINE:-0}
+    OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    LLAMA_API_KEY: ${LLAMA_API_KEY:-}
+    SEMANTIC_INFERENCE_MODEL_DIR: /developer/hflex_eqa_ws/models
+    CLIP_CACHE_DIR: /developer/hflex_eqa_ws/.clip
+    NVIDIA_VISIBLE_DEVICES: all
+    NVIDIA_DRIVER_CAPABILITIES: all
+  volumes: [/tmp/.X11-unix:/tmp/.X11-unix, '${HFLEX_WS}:/developer/hflex_eqa_ws', ./cyclonedds.xml:/tmp/cyclonedds.xml:ro, '${HM3D_DATA}:/developer/hm3d:ro', '${RESULTS_DIR}:/developer/results']
+services:
+  ros2_hvlm:
+    <<: *ros2_hvlm_base
+    container_name: hflex_eqa
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+  ros2_hvlm_launch:
+    <<: *ros2_hvlm_base
+    container_name: hflex_eqa_dataset
+    command: [/bin/bash, -lc, cd /developer/hflex_eqa_ws && source install/setup.bash && exec ros2 launch simulation_manager_ros simulate.launch.yaml]

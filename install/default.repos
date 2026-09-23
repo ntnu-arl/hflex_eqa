@@ -1,0 +1,57 @@
+repositories:
+  config_utilities:
+    type: git
+    url: git@github.com:ntnu-arl/config_utilities.git
+    version: hflex_eqa
+  habitat-ros:
+    type: git
+    url: git@github.com:ntnu-arl/habitat-ros.git
+    version: hflex_eqa
+  hflex_eqa_ros:
+    type: git
+    url: git@github.com:ntnu-arl/hflex_eqa_ros.git
+    version: main
+  hydra_ros:
+    type: git
+    url: git@github.com:ntnu-arl/reasoning_hydra_ros.git
+    version: hflex_eqa
+  ianvs:
+    type: git
+    url: https://github.com/ntnu-arl/Ianvs.git
+    version: main
+  kimera_pgmo:
+    type: git
+    url: git@github.com:ntnu-arl/Kimera-PGMO.git
+    version: hflex_eqa/default
+  kimera_rpgo:
+    type: git
+    url: git@github.com:ntnu-arl/Kimera-RPGO.git
+    version: develop
+  pose_graph_tools:
+    type: git
+    url: https://github.com/MIT-SPARK/pose_graph_tools.git
+    version: ros2
+  hydra:
+    type: git
+    url: git@github.com:ntnu-arl/reasoning_hydra.git
+    version: hflex_eqa
+  semantic_inference:
+    type: git
+    url: git@github.com:ntnu-arl/semantic_inference_ros.git
+    version: hflex_eqa
+  spark_dsg:
+    type: git
+    url: git@github.com:ntnu-arl/Spark-DSG.git
+    version: hflex_eqa
+  spatial_hash:
+    type: git
+    url: https://github.com/MIT-SPARK/Spatial-Hash.git
+    version: main
+  teaser_plusplus:
+    type: git
+    url: https://github.com/MIT-SPARK/TEASER-plusplus.git
+    version: master
+  vlms_ros:
+    type: git
+    url: git@github.com:ntnu-arl/vlms_ros.git
+    version: main
