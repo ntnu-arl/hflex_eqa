@@ -41,8 +41,8 @@
 namespace hflex_eqa {
 
 HflexEqaPipeline::HflexEqaPipeline(const PipelineConfig& pipeline_config,
-                                         int robot_id,
-                                         int config_verbosity)
+                                   int robot_id,
+                                   int config_verbosity)
     : config_verbosity_(config_verbosity) {
   const auto& config = GlobalInfo::init(pipeline_config, robot_id);
   AgentState::init();
@@ -73,7 +73,7 @@ std::string makeBanner(const std::string& message,
 }
 
 std::string HflexEqaPipeline::getModuleInfo(const std::string& name,
-                                               const Module* mod) const {
+                                            const Module* mod) const {
   const auto print_width = config::Settings().printing.width;
   std::stringstream ss;
   ss << makeBanner(name, print_width, '*', true, true);

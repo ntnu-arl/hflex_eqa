@@ -245,14 +245,13 @@ void EQAPlannerManagerModule::blacklistCurrentTargetFrontier(
 
 void EQAPlannerManagerModule::removeBlacklistedFrontiers(
     spark_dsg::DynamicSceneGraph::Ptr& dsg, double grid_resolution) const {
-  hflex_eqa::removeBlacklistedFrontiers(
-      dsg,
-      frontier_blacklist_,
-      config.frontier_blacklist_trans_tolerance,
-      config.frontier_blacklist_rot_tolerance,
-      grid_resolution,
-      config.frontier_blacklist_use_position_radius,
-      config.frontier_blacklist_position_radius_m);
+  hflex_eqa::removeBlacklistedFrontiers(dsg,
+                                        frontier_blacklist_,
+                                        config.frontier_blacklist_trans_tolerance,
+                                        config.frontier_blacklist_rot_tolerance,
+                                        grid_resolution,
+                                        config.frontier_blacklist_use_position_radius,
+                                        config.frontier_blacklist_position_radius_m);
 }
 
 input::Input::Ptr EQAPlannerManagerModule::getLatestInputForStop() {

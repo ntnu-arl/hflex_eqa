@@ -39,8 +39,8 @@ namespace hflex_eqa {
 class HflexEqaPipeline {
  public:
   HflexEqaPipeline(const PipelineConfig& pipeline_config,
-                      int robot_id,
-                      int config_verbosity);
+                   int robot_id,
+                   int config_verbosity);
 
   virtual ~HflexEqaPipeline();
 
