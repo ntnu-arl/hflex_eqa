@@ -1,9 +1,9 @@
 ---
-x-ros2-hvlm-base: &ros2_hvlm_base
+x-ros2-hflex_eqa-base: &ros2_hflex_eqa_base
   image: ros2:hflex-eqa-thor
   build:
     context: ${HFLEX_WS}
-    dockerfile: src/hvlm_planner/docker/thor/Dockerfile
+    dockerfile: src/hflex_eqa/docker/thor/Dockerfile
   network_mode: host
   ipc: host
   pid: host
@@ -40,17 +40,17 @@ x-ros2-hvlm-base: &ros2_hvlm_base
     - ${RESULTS_DIR}:/developer/results
     - ${BAGS_DIR}:/developer/bags
 services:
-  ros2_hvlm:
-    <<: *ros2_hvlm_base
+  ros2_hflex_eqa:
+    <<: *ros2_hflex_eqa_base
     container_name: hflex_eqa_thor
     stdin_open: true
     tty: true
     command: /bin/bash
   scene_graph:
-    <<: *ros2_hvlm_base
+    <<: *ros2_hflex_eqa_base
     container_name: hflex_eqa_scene_graph
-    command: [/bin/bash, -lc, source install/setup.bash && exec ros2 launch hvlm_planner_ros scene_graph.launch.yaml]
+    command: [/bin/bash, -lc, source install/setup.bash && exec ros2 launch hflex_eqa_ros scene_graph.launch.yaml]
   eqa:
-    <<: *ros2_hvlm_base
+    <<: *ros2_hflex_eqa_base
     container_name: hflex_eqa_planner
-    command: [/bin/bash, -lc, source install/setup.bash && exec ros2 launch hvlm_planner_ros eqa.launch.yaml]
+    command: [/bin/bash, -lc, source install/setup.bash && exec ros2 launch hflex_eqa_ros eqa.launch.yaml]

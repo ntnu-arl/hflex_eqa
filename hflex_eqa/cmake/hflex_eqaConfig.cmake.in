@@ -1,0 +1,18 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+
+get_filename_component(hflex_eqa_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+find_dependency(config_utilities REQUIRED)
+find_dependency(Eigen3 REQUIRED)
+find_dependency(spark_dsg REQUIRED)
+find_dependency(OpenCV REQUIRED)
+find_dependency(nanoflann REQUIRED)
+find_package(Open3D REQUIRED)
+
+if(NOT TARGET hflex_eqa::hflex_eqa)
+  include("${hflex_eqa_CMAKE_DIR}/hflex_eqaTargets.cmake")
+endif()
+
+set(hflex_eqa_LIBRARIES hflex_eqa::hflex_eqa)
+check_required_components(hflex_eqa)

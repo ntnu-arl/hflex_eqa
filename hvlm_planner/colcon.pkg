@@ -1,3 +1,0 @@
----
-name: hvlm_planner
-hooks: [share/hvlm_planner/local_setup.bash, share/hvlm_planner/local_setup.dsv, share/hvlm_planner/local_setup.sh, share/hvlm_planner/local_setup.zsh]

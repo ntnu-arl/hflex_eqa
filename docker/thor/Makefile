@@ -1,6 +1,6 @@
 COMPOSE ?= docker compose
 COMPOSE_FILE ?= docker-compose.yaml
-SERVICE ?= ros2_hvlm
+SERVICE ?= ros2_hflex_eqa
 CONTAINER ?= hflex_eqa_thor
 HFLEX_WS ?= $(abspath ../../../..)
 RESULTS_DIR ?= $(HFLEX_WS)/results

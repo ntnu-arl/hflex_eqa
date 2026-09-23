@@ -1,0 +1,3 @@
+---
+name: hflex_eqa
+hooks: [share/hflex_eqa/local_setup.bash, share/hflex_eqa/local_setup.dsv, share/hflex_eqa/local_setup.sh, share/hflex_eqa/local_setup.zsh]

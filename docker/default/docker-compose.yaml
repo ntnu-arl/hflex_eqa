@@ -1,9 +1,9 @@
 ---
-x-ros2-hvlm-base: &ros2_hvlm_base
+x-ros2-hflex_eqa-base: &ros2_hflex_eqa_base
   image: ros2_cuda:hflex-eqa
   build:
     context: ${HFLEX_WS}
-    dockerfile: src/hvlm_planner/docker/default/Dockerfile
+    dockerfile: src/hflex_eqa/docker/default/Dockerfile
   network_mode: host
   ipc: host
   pid: host
@@ -32,13 +32,13 @@ x-ros2-hvlm-base: &ros2_hvlm_base
     NVIDIA_DRIVER_CAPABILITIES: all
   volumes: [/tmp/.X11-unix:/tmp/.X11-unix, '${HFLEX_WS}:/developer/hflex_eqa_ws', ./cyclonedds.xml:/tmp/cyclonedds.xml:ro, '${HM3D_DATA}:/developer/hm3d:ro', '${RESULTS_DIR}:/developer/results']
 services:
-  ros2_hvlm:
-    <<: *ros2_hvlm_base
+  ros2_hflex_eqa:
+    <<: *ros2_hflex_eqa_base
     container_name: hflex_eqa
     stdin_open: true
     tty: true
     command: /bin/bash
-  ros2_hvlm_launch:
-    <<: *ros2_hvlm_base
+  ros2_hflex_eqa_launch:
+    <<: *ros2_hflex_eqa_base
     container_name: hflex_eqa_dataset
     command: [/bin/bash, -lc, cd /developer/hflex_eqa_ws && source install/setup.bash && exec ros2 launch simulation_manager_ros simulate.launch.yaml]

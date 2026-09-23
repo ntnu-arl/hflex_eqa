@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hflex_eqa</name>
+  <version>1.0.0</version>
+  <description>Hierarchical VLM-based planner</description>
+
+  <author email="albert.g.puigjaner@ntnu.no">Albert Gassol Puigjaner</author>
+  <maintainer email="albert.g.puigjaner@ntnu.no">Albert Gassol Puigjaner</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+  <depend>config_utilities</depend>
+  <depend>eigen</depend>
+  <depend>gtsam</depend>
+  <depend>hydra_msgs</depend>
+  <depend>spark_dsg</depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+
+</package>

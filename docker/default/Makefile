@@ -1,7 +1,7 @@
 COMPOSE ?= docker compose
 COMPOSE_FILE ?= docker-compose.yaml
-SERVICE ?= ros2_hvlm
-LAUNCH_SERVICE ?= ros2_hvlm_launch
+SERVICE ?= ros2_hflex_eqa
+LAUNCH_SERVICE ?= ros2_hflex_eqa_launch
 CONTAINER ?= hflex_eqa
 HFLEX_WS ?= $(abspath ../../../..)
 HM3D_DATA ?= $(HFLEX_WS)/data/hm3d
@@ -19,7 +19,7 @@ run:
 simulation:
 	@test -n "$(SCENE_FILE)" || (echo "Set SCENE_FILE to a .glb path inside the container" && exit 1)
 	$(COMPOSE) -f $(COMPOSE_FILE) run --rm $(SERVICE) bash -lc \
-		'cd /developer/hflex_eqa_ws && source install/setup.bash && ros2 launch hvlm_planner_ros habitat_eqa.launch.yaml scene_file:=$(SCENE_FILE)'
+		'cd /developer/hflex_eqa_ws && source install/setup.bash && ros2 launch hflex_eqa_ros habitat_eqa.launch.yaml scene_file:=$(SCENE_FILE)'
 
 dataset:
 	$(COMPOSE) -f $(COMPOSE_FILE) up $(LAUNCH_SERVICE)

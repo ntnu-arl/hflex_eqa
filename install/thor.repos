@@ -1,15 +1,15 @@
 repositories:
   config_utilities:
     type: git
-    url: git@github.com:ntnu-arl/config_utilities.git
+    url: https://github.com/ntnu-arl/config_utilities.git
     version: hflex_eqa
   hflex_eqa_ros:
     type: git
-    url: git@github.com:ntnu-arl/hflex_eqa_ros.git
+    url: https://github.com/ntnu-arl/hflex_eqa_ros.git
     version: main
   hydra_ros:
     type: git
-    url: git@github.com:ntnu-arl/reasoning_hydra_ros.git
+    url: https://github.com/ntnu-arl/reasoning_hydra_ros.git
     version: hflex_eqa
   ianvs:
     type: git
@@ -17,11 +17,11 @@ repositories:
     version: main
   kimera_pgmo:
     type: git
-    url: git@github.com:ntnu-arl/Kimera-PGMO.git
+    url: https://github.com/ntnu-arl/Kimera-PGMO.git
     version: hflex_eqa/thor
   kimera_rpgo:
     type: git
-    url: git@github.com:ntnu-arl/Kimera-RPGO.git
+    url: https://github.com/ntnu-arl/Kimera-RPGO.git
     version: thor
   pose_graph_tools:
     type: git
@@ -29,15 +29,15 @@ repositories:
     version: ros2
   hydra:
     type: git
-    url: git@github.com:ntnu-arl/reasoning_hydra.git
+    url: https://github.com/ntnu-arl/reasoning_hydra.git
     version: hflex_eqa
   semantic_inference:
     type: git
-    url: git@github.com:ntnu-arl/semantic_inference_ros.git
+    url: https://github.com/ntnu-arl/semantic_inference_ros.git
     version: hflex_eqa
   spark_dsg:
     type: git
-    url: git@github.com:ntnu-arl/Spark-DSG.git
+    url: https://github.com/ntnu-arl/Spark-DSG.git
     version: hflex_eqa
   spatial_hash:
     type: git
@@ -49,7 +49,7 @@ repositories:
     version: master
   vlms_ros:
     type: git
-    url: git@github.com:ntnu-arl/vlms_ros.git
+    url: https://github.com/ntnu-arl/vlms_ros.git
     version: main
   ouster-ros:
     type: git
@@ -61,17 +61,17 @@ repositories:
     version: ros2-master
   vectornav:
     type: git
-    url: git@github.com:ntnu-arl/vectornav.git
+    url: https://github.com/ntnu-arl/vectornav.git
     version: ros2
   gtsam:
     type: git
-    url: git@github.com:ntnu-arl/gtsam.git
+    url: https://github.com/ntnu-arl/gtsam.git
     version: feature/imu_factor_with_gravity
   gtsam_points:
     type: git
-    url: git@github.com:ntnu-arl/gtsam_points.git
+    url: https://github.com/ntnu-arl/gtsam_points.git
     version: minimal_updated
   mimosa:
     type: git
-    url: git@github.com:ntnu-arl/mimosa.git
+    url: https://github.com/ntnu-arl/mimosa.git
     version: dev/ros2
